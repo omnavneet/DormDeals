@@ -19,14 +19,21 @@ export default async function Header() {
             <nav className="flex gap-3 font-semibold text-white ">
 
                 <Link href="/newAd" className="bg-blue-600 text-white px-6 py-3 rounded-md shadow-lg transform hover:scale-105 transition-all duration-200 ease-in-out font-semibold inline-flex text-lg items-center gap-2">
-                    <FontAwesomeIcon icon={faPlus} className="h-4"/>
+                    <FontAwesomeIcon icon={faPlus} className="h-4" />
                     <span>Post an ad!</span>
                 </Link>
                 <span className="border-r"></span>
 
                 <div className="flex items-center justify-center mr-4">
                     {userId ?
-                        <div className="scale-125 p-2"> <UserButton /> </div>
+                        <div className="flex gap-2">
+                            <Link
+                                href='/my-ads'
+                                className="bg-blue-600 text-white px-6 py-3 rounded-md shadow-lg transform hover:scale-105 transition-all duration-200 ease-in-out font-semibold inline-flex text-lg items-center gap-2 mr-2">
+                                Your Ads!
+                            </Link>
+                            <div className="scale-125 p-2"> <UserButton /> </div>
+                        </div>
                         :
                         <div className="flex gap-2">
                             <Link href={'/sign-in'}><button className="border-0 rounded-md bg-blue-600 px-3 py-1">Sign In</button>

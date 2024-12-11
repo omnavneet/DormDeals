@@ -1,3 +1,4 @@
+'use client'
 import { Ad } from "@/models/Ad";
 import UploadThumbnail from "./UploadThumbnail";
 import { redirect } from "next/navigation";

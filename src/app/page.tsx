@@ -38,6 +38,7 @@ export default function Home() {
   }, [])
 
   function fetchAds(params?: URLSearchParams) {
+
     if (!params) {
       params = new URLSearchParams()
     }
@@ -53,6 +54,7 @@ export default function Home() {
       .then(async (response) => response.json())
       .then((adDocs) => setAds(adDocs))
   }
+
 
   function handleSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
