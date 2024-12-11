@@ -17,11 +17,11 @@ export default function RootLayout({
   return (
 
     <html lang="en">
-      <body
-      >
+      <body>
         <ClerkProvider>
           <Header />
           {children}
+          {/* <span>footer</span> */}
         </ClerkProvider>
       </body>
     </html>

@@ -7,9 +7,25 @@ input[type="text"], input[type="number"], textarea, select {
 }
 
 label{
-    @apply text-xl uppercase block mt-4 mb-1 font-bold text-gray-700
+    @apply text-sm uppercase block mt-4 mb-2 font-bold text-gray-600
 }
 
 label.upload-btn input[type="file"] {
     display: none;
+}
+
+label.radio-btn{
+    @apply has-[:checked]:bg-blue-200 p-2 items-center flex gap-2 my-2 rounded-lg text-sm
+}
+
+label.radio-btn span.icon{
+    @apply size-10 bg-gray-200 rounded-full flex items-center justify-center
+}
+
+label.radio-btn svg{
+    @apply h-5
+}
+
+.edit-delete-btn{
+   @apply cursor-pointer border-2 px-12 py-3 rounded-md font-semibold flex gap-2 items-center justify-center transition duration-200 text-xl
 }
