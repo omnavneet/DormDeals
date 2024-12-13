@@ -4,7 +4,7 @@ import { currentUser } from "@clerk/nextjs/server"
 import { FilterQuery, PipelineStage } from "mongoose"
 import { NextResponse } from "next/server"
 
-export async function GET(req: Request, res: Response) {
+export async function GET(req: Request) {
   await connectionDB()
   const { searchParams } = new URL(req.url)
   const phrase = searchParams.get("phrase")
