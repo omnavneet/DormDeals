@@ -6,14 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import SubmitButton from "@/components/SubmitButton"
 import FilterPrice from "@/components/FilterPrice"
 import DistancePicker from "@/components/DistancePicker"
-import dynamic from "next/dynamic"
+import AdBlock from "@/components/AdBlock"
 
 type Location = {
   lat: number
   lng: number
 }
-
-const AdBlock = dynamic(() => import("@/components/AdBlock"), { ssr: false })
 
 export default function Home() {
   const [ads, setAds] = useState<Ad[] | null>(null)
