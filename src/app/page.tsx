@@ -1,17 +1,19 @@
 'use client'
 import { Ad } from "@/models/Ad"
 import { useEffect, useRef, useState } from "react"
-import AdBlock from "@/components/AdBlock"
 import { faBook, faMobile, faShirt, faStore } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import SubmitButton from "@/components/SubmitButton"
 import FilterPrice from "@/components/FilterPrice"
 import DistancePicker from "@/components/DistancePicker"
+import dynamic from "next/dynamic"
 
 type Location = {
   lat: number
   lng: number
 }
+
+const AdBlock = dynamic(() => import("@/components/AdBlock"), { ssr: false })
 
 export default function Home() {
   const [ads, setAds] = useState<Ad[] | null>(null)
@@ -28,16 +30,23 @@ export default function Home() {
 
   useEffect(() => {
     if (center === null) {
-      setCenter({ lat: 28.6523392, lng: 77.2931584 });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCenter({ lat: position.coords.latitude, lng: position.coords.longitude })
+        },
+        (err) => {
+          console.error(err)
+        }
+      )
     }
-  }, [center]);
+  }, [center])
 
   useEffect(() => {
-    if (center && !prevcenter) {
+    if (center && !prevcenter && radius) {
       formRef.current?.requestSubmit()
       setPrevCenter(center)
     }
-  }, [center, prevcenter])
+  }, [center, prevcenter, radius])
 
   useEffect(() => {
     fetchAds()

@@ -19,11 +19,13 @@ export default function UploadThumbnail({ file, onClick }: Props) {
       return (
          <a onClick={handleClick} target="_blank">
             <MyImage
+               placeholder="empty"
+               priority={false}
                alt={"product thumbnail"}
-               src={file.filePath + '?tr=w-400,h-500,fo-auto'} 
-               className="rounded-lg object-contain bg-red-50"
+               src={file.filePath + '?tr=w-250,h-300,fo-auto'} 
+               className="rounded-sm bg-red-50"
                width={250}
-               height={350}
+               height={300}
             />
          </a>
       );

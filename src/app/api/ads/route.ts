@@ -5,95 +5,100 @@ import { FilterQuery, PipelineStage } from "mongoose"
 import { NextResponse } from "next/server"
 
 export async function GET(req: Request) {
+  await connectionDB();
+  const { searchParams } = new URL(req.url);
+  const phrase = searchParams.get("phrase");
+  const category = searchParams.get("category");
+  const minPrice = searchParams.get("minPrice");
+  const maxPrice = searchParams.get("maxPrice");
+  const radius = searchParams.get("radius");
+  const center = searchParams.get("center");
 
-  await connectionDB()
-  const { searchParams } = new URL(req.url)
-  const phrase = searchParams.get("phrase")
-  const filter: FilterQuery<Ad> = {}
-  const category = searchParams.get("category")
-  const minPrice = searchParams.get("minPrice")
-  const maxPrice = searchParams.get("maxPrice")
-  const radius = searchParams.get("radius")
-  const center = searchParams.get("center")
+  const filter: FilterQuery<Ad> = {};
 
-  const aggregationSteps: PipelineStage[] = []
+  // Price filter logic
+  if (minPrice || maxPrice) {
+    filter.price = {};
+    if (minPrice) filter.price.$gte = parseInt(minPrice);
+    if (maxPrice) filter.price.$lte = parseInt(maxPrice);
+  }
 
+  // Phrase and category filters
   if (phrase) {
-    filter.title = { $regex: ".*" + phrase + ".*", $options: "i" }
+    filter.title = { $regex: ".*" + phrase + ".*", $options: "i" };
   }
   if (category) {
-    filter.category = category
-  }
-  if (minPrice && maxPrice) {
-    filter.price = {
-      $gte: parseInt(minPrice),
-      $lte: parseInt(maxPrice),
-    }
-  }
-  if (minPrice && !maxPrice) {
-    filter.price = {
-      $gte: parseInt(minPrice),
-    }
-  }
-  if (!minPrice && maxPrice) {
-    filter.price = {
-      $lte: parseInt(maxPrice),
-    }
+    filter.category = category;
   }
 
+  const aggregationSteps: PipelineStage[] = [];
+
+  // Geospatial filter
   if (radius && center) {
-    const coords = center.split("-")
-    aggregationSteps.push({
-      $geoNear: {
-        near: {
-          type: "Point",
-          coordinates: [parseFloat(coords[0]), parseFloat(coords[1])],
-        },
-        distanceField: "distance",
-        maxDistance: parseInt(radius),
-        spherical: true,
-      },
-    })
+    const coords = center.split("-");
+    if (coords.length === 2) {
+      const [lat, lng] = coords.map((coord) => parseFloat(coord));
+      if (!isNaN(lat) && !isNaN(lng)) {
+        aggregationSteps.push({
+          $geoNear: {
+            near: { type: "Point", coordinates: [lat, lng] },
+            distanceField: "distance",
+            maxDistance: parseInt(radius),
+            spherical: true,
+          },
+        });
+      }
+    }
   }
 
-  aggregationSteps.push({
-    $match: filter,
-  })
-  aggregationSteps.push({
-    $sort: { createdAt: -1 },
-  })
+  aggregationSteps.push({ $match: filter });
+  aggregationSteps.push({ $sort: { createdAt: -1 } });
 
   try {
-    const adDocs = await AdModel.aggregate(aggregationSteps)
-    return NextResponse.json(adDocs)
+    const adDocs = await AdModel.aggregate(aggregationSteps);
+    return NextResponse.json(adDocs);
   } catch (error) {
-    console.error("Error fetching ads:", error)
+    console.error("Error fetching ads:", error);
     return new NextResponse(
       JSON.stringify({ success: false, message: "Failed to fetch ads" }),
       { status: 500 }
-    )
+    );
   }
 }
 
 export async function DELETE(req: Request) {
-  const url = new URL(req.url)
-  const id = url.searchParams.get("id")
+  const url = new URL(req.url);
+  const id = url.searchParams.get("id");
 
-  await connectionDB()
-  const adDoc = await AdModel.findById(id)
-  const user = await currentUser()
+  if (!id) {
+    return new NextResponse(
+      JSON.stringify({ success: false, message: "Ad ID is required" }),
+      { status: 400 }
+    );
+  }
+
+  await connectionDB();
+  const adDoc = await AdModel.findById(id);
+  const user = await currentUser();
 
   if (!adDoc || adDoc.userEmail !== user?.primaryEmailAddress?.emailAddress) {
     return new NextResponse(
       JSON.stringify({ success: false, message: "Unauthorized" }),
       { status: 403 }
-    )
+    );
   }
 
-  await AdModel.findByIdAndDelete(id)
-
-  return new NextResponse(
-    JSON.stringify({ success: true, message: "Ad deleted successfully" }),
-    { status: 200 }
-  )
+  try {
+    await AdModel.findByIdAndDelete(id);
+    return new NextResponse(
+      JSON.stringify({ success: true, message: "Ad deleted successfully" }),
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error deleting ad:", error);
+    return new NextResponse(
+      JSON.stringify({ success: false, message: "Failed to delete ad" }),
+      { status: 500 }
+    );
+  }
 }
