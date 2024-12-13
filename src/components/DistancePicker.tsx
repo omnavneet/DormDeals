@@ -103,7 +103,7 @@ const DistancePicker = ({
     return (
         <>
             <label>Location</label>
-            <div ref={mapDiv} id="distance" className="bg-gray-200 size-12 w-full h-72">
+            <div ref={mapDiv} id="distance" className="size-12 w-full h-64 border-2 border-black">
                 {error && (
                     <div className="text-gray-400 text-2xl p-5">{error}</div>
                 )}

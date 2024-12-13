@@ -7,9 +7,9 @@ const FilterPrice = () => {
             <div className="flex mb-5 gap-4">
 
                 <input
-                    type="number" name="minPrice" placeholder="Min Price" className="rounded-lg text-lg" />
+                    type="number" name="minPrice" placeholder="Min Price" className="border-2 border-black text-lg" />
                 <input
-                    type="number" name="maxPrice" placeholder="Max Price" className="rounded-lg text-lg" />
+                    type="number" name="maxPrice" placeholder="Max Price" className="border-2 border-black text-lg" />
             </div>
         </div>
     )

@@ -1,8 +1,15 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Header from "@/components/Header";
-import { ClerkProvider } from "@clerk/nextjs";
+import type { Metadata } from "next"
+import "./globals.css"
+import Header from "@/components/Header"
+import { ClerkProvider } from "@clerk/nextjs"
+import { Inter } from 'next/font/google'
 
+
+const inter = Inter({
+  weight: '300',
+  style: 'normal',
+  subsets: ["latin"],
+})
 
 export const metadata: Metadata = {
   title: "DormDeals",
@@ -17,7 +24,7 @@ export default function RootLayout({
   return (
 
     <html lang="en">
-      <body>
+      <body className={inter.className}>
         <ClerkProvider>
           <Header />
           {children}

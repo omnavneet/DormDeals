@@ -25,9 +25,9 @@ const page = async () => {
   })
 
   return (
-    <div className='my-10 mx-4'>
-      <h1 className='font-bold text-3xl mb-4 mt-2'>Your Ads</h1>
-      <div className='grid grid-cols-4 gap-x-2 gap-y-8 justify-start'>
+    <div className='mb-10 mt-4 mx-4'>
+      <h1 className='font-semibold text-4xl py-4 hover:underline flex justify-center'>Your Ads</h1>
+      <div className='grid grid-cols-4 justify-start gap-2'>
         {sanitizedAds.map((ad) => (
           <AdBlock key={ad._id} ad={ad} />
         ))}

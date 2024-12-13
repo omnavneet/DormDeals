@@ -71,18 +71,18 @@ export default function Home() {
   }
 
   return (
-    <div className="flex w-full">
+    <div className="flex w-full py-2">
       <form
         ref={formRef}
         onSubmit={handleSearch}
-        className="grow w-1/5 p-4 border-r bg-gray-100">
+        className="w-1/5 p-4">
 
-        <input type="text" name="phrase" placeholder="Search DormDeals" className="border p-2 w-full text-lg" />
+        <input type="text" name="phrase" placeholder="Search DormDeals" className="p-2 w-full text-lg border-[2px] border-black mb-8"/>
 
-        <div className="mt-5">
+        <div className="mb-8">
 
           <label
-            className="radio-btn">
+            className="radio-btn border-2 border-black">
             <input
               onClick={() => formRef.current?.requestSubmit()}
               className="hidden" type="radio" name="category" value="" defaultChecked />
@@ -96,7 +96,7 @@ export default function Home() {
             return (
               <label
                 key={category.value}
-                className="radio-btn">
+                className="radio-btn border-2 border-black">
                 <input
                   onClick={() => formRef.current?.requestSubmit()}
                   className="hidden" type="radio" name="category" value={category.value} />
@@ -127,9 +127,9 @@ export default function Home() {
         <SubmitButton formRef={formRef} />
       </form>
 
-      <div className="grow w-4/5 p-2 bg-red-50">
-        <h2 className="font-bold text-3xl mb-4 mt-2">Latest Products</h2>
-        <div className="grid grid-cols-4 gap-x-2 gap-y-8 justify-start">
+      <div className="grow w-3/5">
+        {/* <h2 className="font-bold text-3xl mb-4 mt-2">Latest Products</h2> */}
+        <div className="grid grid-cols-4 justify-start gap-2">
           {ads && ads.map((ad) => (
             <AdBlock key={ad._id} ad={ad} />
           ))}

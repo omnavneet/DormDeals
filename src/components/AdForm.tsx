@@ -66,12 +66,12 @@ export default function AdForm(
         const result = id
             ? await updateAd(formData)
             : await createAd(formData)
-            
+
         redirect(`/ad/${result._id}`)
     }
 
     return (
-        <form action={handleSubmit} className="max-w-[1000px] mx-auto grid grid-cols-2 gap-8 mt-5">
+        <form action={handleSubmit} className="max-w-[1200px] mx-auto grid grid-cols-2 gap-10 mt-8">
 
             <div >
                 <div className="flex items-center justify-center flex-col bg-red-100 py-5 rounded-xl">
@@ -82,12 +82,11 @@ export default function AdForm(
 
                     <label
                         className={
-                            "upload-btn cursor-pointer border-2 px-10 py-3 rounded-md font-semibold mt-2 flex gap-2 items-center justify-center border-blue-600 text-blue-600"
+                            "upload-btn cursor-pointer border-2 px-8 py-3 rounded-sm font-semibold mt-2 flex gap-2 items-center justify-center border-blue-600 text-blue-600"
                             + (
                                 isUploading ? "text-gray-500 cursor-not-allowed border-none" :
-                                    "border-blue-600 text-blue-600  hover:bg-blue-600 hover:text-white transition-all duration-200 "
+                                    "border-blue-600 text-blue-600  hover:text-gray-500 hover:border-gray-500 transition-all duration-200 "
                             )}>
-
                         <Uploader
                             onUploadStart={() => setIsUploading(true)}
                             onSuccess={file => {
@@ -143,7 +142,7 @@ export default function AdForm(
 
             <div>
                 <AdTextInputs defaultValues={defaultTexts} />
-                <PublishButton>{id ? 'Save' : 'Publish'}</PublishButton>
+                <PublishButton>{id ? 'Save Ad!' : 'Publish Ad!'}</PublishButton>
             </div>
 
         </form>

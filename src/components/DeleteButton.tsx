@@ -41,14 +41,14 @@ function DeleteButton({ id }: { id: string }) {
 
                         <button
                             onClick={() => setShowQuestion(false)}
-                            className='text-black px-8 py-3 rounded-md shadow-lg transform font-semibold text-lg mt-2 bg-white border border-black hover:scale-105 transition duration-200'
+                            className='text-black px-8 py-3 rounded-sm shadow-lg transform font-semibold text-lg mt-2 bg-white border border-black hover:scale-105 transition duration-200'
                         >
                             No, Cancel!
                         </button>
 
                         <button
                             onClick={handleDelete}
-                            className='text-white px-8 py-3 rounded-md shadow-lg font-semibold text-lg mt-2 bg-red-500 border border-red-500 hover:scale-105 transition duration-200'
+                            className='text-white px-8 py-3 rounded-sm shadow-lg font-semibold text-lg mt-2 bg-red-500 border border-red-500 hover:scale-105 transition duration-200'
                         >
                             Yes, Delete!
                         </button>
@@ -62,9 +62,9 @@ function DeleteButton({ id }: { id: string }) {
         <div>
             <button
                 onClick={() => setShowQuestion(true)}
-                className="edit-delete-btn border-red-600 text-red-600 hover:bg-red-600 hover:text-white ">
+                className="edit-delete-btn border-red-600 text-red-600 hover:bg-red-600 hover:text-white hover:scale-105">
                 <FontAwesomeIcon icon={faTrash} />
-                Delete</button>
+                Delete Ad</button>
         </div>
     )
 }

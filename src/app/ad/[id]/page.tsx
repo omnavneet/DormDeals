@@ -25,7 +25,7 @@ export default async function SingleAdPage({ params }: Props) {
     if (!adDoc) return <div className="text-center text-gray-600 mt-10">Ad not found</div>
 
     return (
-        <div className="flex mx-40 pt-12 gap-10 scale-110">
+        <div className="flex mx-40 pt-14 gap-10 scale-110">
 
             <div className="lg:w-1/2 w-full">
                 <Gallery files={adDoc.files} />
@@ -33,9 +33,9 @@ export default async function SingleAdPage({ params }: Props) {
                     <div className="mt-16 flex gap-4 justify-center">
                         <Link
                             href={`/edit/${adDoc._id}`}
-                            className="edit-delete-btn border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white ">
+                            className="edit-delete-btn border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:scale-105">
                             <FontAwesomeIcon icon={faPencil} />
-                            Edit</Link>
+                            Edit Ad</Link>
 
                         <DeleteButton id={adDoc._id.toString()} />
                     </div>
@@ -43,24 +43,24 @@ export default async function SingleAdPage({ params }: Props) {
             </div>
 
             <div className="lg:w-1/2 w-full h-[500px]">
-                <h1 className="text-4xl font-bold mb-4">{adDoc.title}</h1>
+                <h1 className="text-4xl font-bold mb-2">{adDoc.title}</h1>
 
-                <div className="font-semibold px-2 bg-red-400 rounded-full w-32 flex items-center justify-center mb-5">{adDoc.category}
+                <div className="inline-flex items-center justify-center px-1 py-1 text-sm font-medium rounded-full border-2 bg-red-100 text-red-800 border-red-400 w-32 mb-4">{adDoc.category}
                 </div>
 
                 <div className="font-bold text-2xl mb-8">
                     <span>$</span>{adDoc.price}<span></span>
                 </div>
 
-                <div>
+                <div className="mb-8">
                     <label>Description</label>
-                    <div className="text-gray-500 font-semibold mb-8">{adDoc.description}
+                    <div className="text-gray-500 font-semibold">{adDoc.description}
                     </div>
                 </div>
 
-                <div>
+                <div className="mb-8">
                     <label>Contact</label>
-                    <div className="text-gray-500 font-semibold mb-8">mobile:{adDoc.contact}</div>
+                    <div className="text-gray-500 font-semibold ">mobile:{adDoc.contact}</div>
                 </div>
 
 

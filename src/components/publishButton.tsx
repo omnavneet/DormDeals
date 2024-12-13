@@ -8,7 +8,7 @@ export default function PublishButton({ children }: { children: ReactNode }) {
         <button
             disabled={pending}
 
-            className={(pending ? "bg-gray-500" : "bg-blue-600") + " text-white px-12 py-4 rounded-md shadow-lg transform hover:scale-105 transition-all duration-200 ease-in-out font-semibold text-2xl mt-2"}>
+            className={(pending ? "bg-gray-500" : "bg-[#4CAF50]") + " border-2 border-[#4CAF50] text-white duration-200 px-12 py-4 rounded-sm font-bold inline-flex text-lg items-center gap-2 hover:bg-white hover:text-[#4CAF50] hover:shadow-md hover:scale-105"}>
 
             {pending && (
                 <span>Saving...</span>

@@ -22,11 +22,11 @@ export default function Gallery({ files }: { files: UploadResponse[] }) {
     }
 
     return (
-        <div className="flex flex-col items-center relative">
+        <div className="flex flex-col items-center relative bg-red-50">
 
             {activeFile && (
                 <>
-                    <div className="w-auto h-[500px] flex items-center justify-center overflow-hidden">
+                    <div className="w-auto h-[500px] flex items-center justify-center overflow-hidden p-3">
                         <UploadView
                             file={activeFile}
                         />
@@ -37,16 +37,16 @@ export default function Gallery({ files }: { files: UploadResponse[] }) {
 
                             <button
                                 onClick={prevFile}
-                                className="text-red-600 flex justify-center size-12 bg-gray-500/40
-                            hover:bg-gray-500/70 rounded-full items-center transition">
+                                className="text-black flex justify-center size-12 bg-gray-500/30
+                            hover:bg-gray-600/70 hover:text-white rounded-full items-center transition">
                                 <FontAwesomeIcon
                                     icon={faChevronLeft}
                                 />
                             </button>
                             <button
                                 onClick={nextFile}
-                                className="text-red-600 flex justify-center size-12 bg-gray-500/40
-                            hover:bg-gray-500/70 rounded-full items-center transition">
+                                className="text-black flex justify-center size-12 bg-gray-500/30
+                            hover:bg-gray-600/70 hover:text-white rounded-full items-center transition">
                                 <FontAwesomeIcon
                                     icon={faChevronRight}
                                 />

@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 input[type="text"], input[type="number"], textarea, select {
-    @apply w-full border p-4 rounded-lg
+    @apply w-full p-2 rounded-sm
 }
 
 label{
-    @apply text-sm uppercase block mt-4 mb-2 font-bold text-gray-600
+    @apply text-sm uppercase block mb-2 font-semibold text-black
 }
 
 label.upload-btn input[type="file"] {
@@ -15,7 +15,7 @@ label.upload-btn input[type="file"] {
 }
 
 label.radio-btn{
-    @apply has-[:checked]:bg-blue-200 p-2 items-center flex gap-2 my-2 rounded-lg text-sm
+    @apply has-[:checked]:bg-red-200 p-1 items-center flex gap-2 rounded-sm text-sm
 }
 
 label.radio-btn span.icon{
@@ -27,5 +27,5 @@ label.radio-btn svg{
 }
 
 .edit-delete-btn{
-   @apply cursor-pointer border-2 px-12 py-3 rounded-md font-semibold flex gap-2 items-center justify-center transition duration-200 text-xl
+   @apply cursor-pointer border-2 px-12 py-3 rounded-sm font-semibold flex gap-2 items-center justify-center transition duration-200 text-xl
 }
