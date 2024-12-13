@@ -1,12 +1,12 @@
 'use server'
-import DeleteButton from "@/components/DeleteButton";
-import Gallery from "@/components/gallery";
-import LocationMap from "@/components/LocationMap";
-import { connectionDB } from "@/libs/connectionDB";
-import { Ad, AdModel } from "@/models/Ad";
-import { currentUser } from "@clerk/nextjs/server";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DeleteButton from "@/components/DeleteButton"
+import Gallery from "@/components/gallery"
+import LocationMap from "@/components/LocationMap"
+import { connectionDB } from "@/libs/connectionDB"
+import { Ad, AdModel } from "@/models/Ad"
+import { currentUser } from "@clerk/nextjs/server"
+import { faPencil } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
 
 
