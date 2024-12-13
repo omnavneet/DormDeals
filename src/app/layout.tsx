@@ -14,7 +14,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "DormDeals",
   description: "Buy and sell used items in your dorm!",
-};
+}
 
 export default function RootLayout({
   children,
@@ -28,7 +28,6 @@ export default function RootLayout({
         <ClerkProvider>
           <Header />
           {children}
-          {/* <span>footer</span> */}
         </ClerkProvider>
       </body>
     </html>

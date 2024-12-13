@@ -13,7 +13,7 @@ export default async function Header() {
 
             <Link
                 href="/"
-                className="text-6xl z-10"> DormDeals
+                className="text-6xl z-5"> DormDeals
             </Link>
 
             <nav className="flex gap-3 font-semibold text-white ">

@@ -27,6 +27,12 @@ export default function Home() {
   ]
 
   useEffect(() => {
+    if (center === null) {
+      setCenter({ lat: 28.6523392, lng: 77.2931584 });
+    }
+  }, [center]);
+
+  useEffect(() => {
     if (center && !prevcenter) {
       formRef.current?.requestSubmit()
       setPrevCenter(center)
@@ -48,11 +54,16 @@ export default function Home() {
     if (!params.has('radius')) {
       params.set('radius', Math.round(radius).toString())
     }
+    if (!params.get('center')) {
+      console.warn("Center not provided in search params.");
+      return;
+    }
     const url = params ? `/api/ads?${params.toString()}` : `/api/ads`;
 
     fetch(url)
       .then(async (response) => response.json())
       .then((adDocs) => setAds(adDocs))
+      .catch((error) => console.error(error))
   }
 
 

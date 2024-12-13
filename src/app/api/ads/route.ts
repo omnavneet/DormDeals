@@ -5,6 +5,7 @@ import { FilterQuery, PipelineStage } from "mongoose"
 import { NextResponse } from "next/server"
 
 export async function GET(req: Request) {
+
   await connectionDB()
   const { searchParams } = new URL(req.url)
   const phrase = searchParams.get("phrase")
@@ -62,8 +63,16 @@ export async function GET(req: Request) {
     $sort: { createdAt: -1 },
   })
 
-  const adDocs = await AdModel.aggregate(aggregationSteps)
-  return NextResponse.json(adDocs)
+  try {
+    const adDocs = await AdModel.aggregate(aggregationSteps)
+    return NextResponse.json(adDocs)
+  } catch (error) {
+    console.error("Error fetching ads:", error)
+    return new NextResponse(
+      JSON.stringify({ success: false, message: "Failed to fetch ads" }),
+      { status: 500 }
+    )
+  }
 }
 
 export async function DELETE(req: Request) {
