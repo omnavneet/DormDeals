@@ -7,18 +7,20 @@ import { Ad, AdModel } from "@/models/Ad";
 import { currentUser } from "@clerk/nextjs/server";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
-
-type Props = {
-    params: Promise<{ id: string }>
-    searchParams: { [key: string]: string }
-};
+import Link from "next/link"
 
 
-export default async function SingleAdPage({ params }: Props) {
+type Params = Promise<{ id: string }>
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+
+export default async function SingleAdPage(props: {
+    params: Params
+    searchParams: SearchParams
+}) {
     await connectionDB()
-    const resolvedParams = await params
-    const adDoc = await AdModel.findById(resolvedParams.id) as Ad
+    const params = await props.params
+    const id = params.id
+    const adDoc = await AdModel.findById(id) as Ad
 
     const user = await currentUser()
 
@@ -37,7 +39,7 @@ export default async function SingleAdPage({ params }: Props) {
                             <FontAwesomeIcon icon={faPencil} />
                             Edit Ad</Link>
 
-                        <DeleteButton id={adDoc._id.toString()} />
+                        <DeleteButton id={adDoc._id!.toString()} />
                     </div>
                 )}
             </div>

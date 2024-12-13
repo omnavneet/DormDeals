@@ -41,11 +41,13 @@ export default function LocationPicker({
             })
             setPin(pin)
 
-            listener = map.addListener("click", (ev) => {
-                const lat = ev.latLng.lat()
-                const lng = ev.latLng.lng()
-                pin.position = { lat, lng }
-                setLocation({ lat, lng })
+            listener = map.addListener("click", (ev: google.maps.MapMouseEvent) => {
+                if (ev.latLng) {
+                    const lat = ev.latLng.lat()
+                    const lng = ev.latLng.lng()
+                    pin.position = { lat, lng }
+                    setLocation({ lat, lng })
+                }
             })
         }
 
