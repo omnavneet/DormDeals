@@ -3,22 +3,22 @@ import DeleteButton from "@/components/DeleteButton";
 import Gallery from "@/components/gallery";
 import LocationMap from "@/components/LocationMap";
 import { connectionDB } from "@/libs/connectionDB";
-import { AdModel } from "@/models/Ad";
+import { Ad, AdModel } from "@/models/Ad";
 import { currentUser } from "@clerk/nextjs/server";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
 type Props = {
-    params: {
-        id: string
-    }
+    params: Promise<{ id: string }>
     searchParams: { [key: string]: string }
-}
+};
+
 
 export default async function SingleAdPage({ params }: Props) {
     await connectionDB()
-    const adDoc = await AdModel.findById(params.id)
+    const resolvedParams = await params
+    const adDoc = await AdModel.findById(resolvedParams.id) as Ad
 
     const user = await currentUser()
 
