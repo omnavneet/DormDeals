@@ -66,8 +66,7 @@ export async function GET(req: Request, res: Response) {
   return NextResponse.json(adDocs)
 }
 
-export async function DELETE(req: Request,res: Response) {
-
+export async function DELETE(req: Request) {
   const url = new URL(req.url)
   const id = url.searchParams.get("id")
 
@@ -83,7 +82,6 @@ export async function DELETE(req: Request,res: Response) {
   }
 
   await AdModel.findByIdAndDelete(id)
-
 
   return new NextResponse(
     JSON.stringify({ success: true, message: "Ad deleted successfully" }),

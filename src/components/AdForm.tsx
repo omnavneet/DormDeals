@@ -10,7 +10,6 @@ import { UploadResponse } from 'imagekit/dist/libs/interfaces'
 import { createAd, updateAd } from '@/app/actions/adActions'
 import { redirect } from 'next/navigation'
 import UploadThumbnail from './UploadThumbnail'
-import { revalidatePath } from 'next/cache'
 
 type Location = {
     lat: number,

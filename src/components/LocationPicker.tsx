@@ -13,8 +13,8 @@ export default function LocationPicker({
     location: Location
     setLocation: Dispatch<SetStateAction<Location>>
 }) {
-    const [map, setMap] = useState<any>()
-    const [pin, setPin] = useState<any>()
+    const [map, setMap] = useState<google.maps.Map | null>()
+    const [pin, setPin] = useState<google.maps.marker.AdvancedMarkerElement | null>(null)
     const divRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {

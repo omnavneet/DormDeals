@@ -1,5 +1,5 @@
 import { UploadResponse } from "imagekit/dist/libs/interfaces"
-import mongoose, { model, Model, models, Schema } from "mongoose"
+import { model, Model, models, Schema } from "mongoose"
 
 export type Ad = {
   _id?: string

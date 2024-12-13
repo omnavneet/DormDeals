@@ -31,7 +31,7 @@ export default function Home() {
       formRef.current?.requestSubmit()
       setPrevCenter(center)
     }
-  }, [center])
+  }, [center, prevcenter])
 
   useEffect(() => {
     fetchAds()
@@ -77,7 +77,7 @@ export default function Home() {
         onSubmit={handleSearch}
         className="w-1/5 p-4">
 
-        <input type="text" name="phrase" placeholder="Search DormDeals" className="p-2 w-full text-lg border-[2px] border-black mb-8"/>
+        <input type="text" name="phrase" placeholder="Search DormDeals" className="p-2 w-full text-lg border-[2px] border-black mb-8" />
 
         <div className="mb-8">
 
