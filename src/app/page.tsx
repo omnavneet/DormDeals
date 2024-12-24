@@ -89,20 +89,19 @@ export default function Home() {
   }
 
   return (
-    <div className="flex w-full py-2">
+    <div className="flex lg:w-full py-2 lg:flex-row md:flex-col flex-col">
       <form
         ref={formRef}
         onSubmit={handleSearch}
-        className="w-1/5 p-4">
+        className="lg:w-1/5 lg:p-4 md:p-4 p-2 md:w-full w-full">
 
         <input type="text" name="phrase" placeholder="Search DormDeals" className="p-2 w-full text-lg border-[2px] border-black mb-8" />
 
-        <div className="mb-8">
+        <div className="mb-8 flex-col flex">
 
           <label
             className="radio-btn border-2 border-black">
             <input
-              onClick={() => formRef.current?.requestSubmit()}
               className="hidden" type="radio" name="category" value="" defaultChecked />
             <span className="icon">
               <FontAwesomeIcon icon={faStore} />
@@ -116,7 +115,6 @@ export default function Home() {
                 key={category.value}
                 className="radio-btn border-2 border-black">
                 <input
-                  onClick={() => formRef.current?.requestSubmit()}
                   className="hidden" type="radio" name="category" value={category.value} />
                 <span className="icon">
                   <FontAwesomeIcon icon={category.icon} />
@@ -145,15 +143,15 @@ export default function Home() {
         <SubmitButton formRef={formRef} />
       </form>
 
-      <div className="grow w-3/5">
+      <div className="grow lg:w-3/5 md:w-full w-full" >
         {/* <h2 className="font-bold text-3xl mb-4 mt-2">Latest Products</h2> */}
-        <div className="grid grid-cols-4 justify-start gap-2">
+        <div className="grid lg:grid-cols-4 justify-start gap-2 md:grid-cols-3 grid-cols-2 md:mx-4 lg:mx-0 lg:scale-100 md:scale-95 scale-95">
           {ads && ads.map((ad) => (
             <AdBlock key={ad._id} ad={ad} />
           ))}
         </div>
         {ads && ads.length === 0 &&
-          <div className="text-gray-500 font-bold text-2xl py-5">
+          <div className="text-gray-500 font-bold text-2xl py-5 lg:mx-0 mx-4 md:mx-4">
             No Products found
           </div>
         }

@@ -11,7 +11,7 @@ export default function AdBlock({ ad }: { ad: Ad }, index: number) {
       className="flex flex-col items-center justify-center bg-red-50 overflow-hidden"
     >
       {ad.files?.length > 0 && (
-        <div className="w-full h-auto flex justify-center overflow-hidden py-8">
+        <div className="w-full h-auto flex justify-center overflow-hidden py-8 scale-90">
           <UploadThumbnail
             onClick={() => redirect(`/ad/${ad._id}`)}
             file={ad.files[0]}
